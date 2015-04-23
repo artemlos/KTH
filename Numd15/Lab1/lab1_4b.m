@@ -1,3 +1,6 @@
+% This script will try to put a circle a that attempts to go through/close
+% to the 10 points points.
+
 [x,y] = ginput(10)
 
 A = [ones(10, 1) x y]
