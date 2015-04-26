@@ -31,8 +31,8 @@ temp =floor(temp.*10)./10;
 time = time./1000;
 time = time./(60); % minutes
 plot(time,temp);
-%logtemp = log(temp);
-A = [ones(length(time),1) time.^(-1)];
+logtemp = temp%log(temp);
+A = [ones(length(time),1) time time.^2 time.^3 time.^4 time.^5 time.^6 time.^7];
 %A = [ones(length(time),1) time];
 
 x = A\logtemp;
@@ -43,7 +43,7 @@ x_diffmethod = inv(A'*A)*A'*logtemp;
 
 
 hold on
-%plot(time,exp(x(1))+exp(x(2).*time));
+plot(time,exp(x(1))+exp(x(2).*time));
 %plot(time,polyval(fliplr(x'),time));
 %plot(time,polyval(fliplr(x_diffmethod'),time));
 
