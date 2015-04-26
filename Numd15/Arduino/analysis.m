@@ -32,7 +32,7 @@ time = time./1000;
 time = time./(60); % minutes
 plot(time,temp);
 %logtemp = log(temp);
-A = [ones(length(time),1) time.^(-1)];
+A = [ones(length(time),1) time.^(-1) time ];
 %A = [ones(length(time),1) time];
 
 x = A\logtemp;
