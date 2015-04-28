@@ -1,0 +1,86 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[ruled,vlined]{algorithm2e}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+\usepackage{hyperref}
+
+\lstset{
+% vilket språk vi använder i våra kodlistings, så att listings-paketet vet hur den ska highligta saker
+language=Java,
+% huruvida vi ska ha syntax highlighting
+fancyvrb=true,
+% hur stora tabstopp vi ska ha
+tabsize=4,
+% huruvida vi ska tillåta andra tecken än a-z
+extendedchars=\true
+% hur breda listings vi vill ha (skriv exempelvis linewidth=0.5\textwidth för att få listings som bara tar upp halva bredden av sidan)
+linewidth=\textwidth,
+% huruvida vi ska visa mellanslag
+showstringspaces=false,
+% huruvida vi ska bryta rader som är för långa
+breaklines=true,
+% huruvida den ska få bryta rader mitt i ord eller inte (true här betyder att den bara bryter mellan ord)
+breakatwhitespace=true,
+% indentera radbrytningar automatiskt
+breakautoindent=true,
+% lägg in radnummer på vänster sida
+numbers=left,
+% hur stora radnumren ska vara
+numberstyle=\tiny,
+% hur långt det ska vara mellan radnumren och koden
+numbersep=8pt
+}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+\section*{Bug 1}
+\paragraph{\color{red}Problem} Deadlock is caused since all go routines are asleep. \paragraph{\color{blue}Solution} Create a new go routine and make sure that the channel is closed once data is set. 
+\subsection*{Bug1.go}
+\lstinputlisting{bug1.go}
+
+\section*{Bug 2}
+\paragraph{\color{red}Problem} We are not guaranteed that the Go routine will be able to go through the entire channel
+before the for statement is entirely executed. In GO, send occurs before receive.
+\paragraph{\color{blue} Solution} Once information was sent through the channel, we wait for a reply by the Go routine \textit{Print}. When the text is printed on the screen, it sends a $1$ through the channel. We know that send will occur before receive, hence the behaviour of the methods. In this way, we achieve synchronization.
+
+\lstinputlisting{Bug2_v2.go}
+
+% 20:20
+\section*{Many Receivers}
+\begin{itemize}
+	\item Swapping \verb|wgp.Wait()| with \verb|close(ch)| will not allow us to send/receive any information through the channel before the go routines are complete. This will throw an error.
+	\item Moving \verb|close(ch)| out from the \verb|main()| method to \verb|Produce()| will throw an error (high probability) sometime during execution. Just because one GO routine completes does not imply that all are going to be complete at that instance in time.
+	\item Nothing will happen if we remove \verb|close(ch)| entirely as it will be garbage collected if not in use. It might be important to close if the receiver requires that.\footnote{\url{http://stackoverflow.com/a/8593986}, last used 2015.03.29}
+	\item By increasing the number of consumers from $2$ to $4$, the program will execute $200-300ms$ faster. That's because we have more consumers that can consume the data.
+	\item No, we cannot take it for granted that all strings are going to be printed.
+	We can be confident that all strings are going to be printed. That's because the program is going to wait while the produces produce data and this is going to be simultaneously processed by the consumers.
+
+	
+\end{itemize}
+
+\lstinputlisting{ManyReceivers.go}
+
+\section*{Oracle}
+
+\lstinputlisting{Oracle.go}
+
+\end{document}
+

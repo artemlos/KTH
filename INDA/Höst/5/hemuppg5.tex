@@ -1,0 +1,395 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+
+\lstset{language=Java,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\footnotesize,
+numbers=left,
+rulesepcolor=\color{gray}, %fancy shadow for borders
+stepnumber=1,
+frame=shadowbox,
+breaklines=true}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+
+\section*{Exercises 4.40-4.42 and 4.54-4.55}
+\textbf{The Club class} is shown below:
+\begin{lstlisting}
+/**
+ * Store details of club memberships.
+ * 
+ * @author (Artem Los) 
+ * @version (2014.09.29)
+ */
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Club
+{
+    private ArrayList<Membership> memberships;
+
+    public Club()
+    {
+        memberships = new ArrayList<Membership>();
+        
+    }
+
+    /**
+     * Add a new member to the club's list of members.
+     * @param member The member object to be added.
+     */
+    public void join(Membership member)
+    {
+        memberships.add(member);
+    }
+
+    /**
+     * @return The number of members (Membership objects) in
+     *         the club.
+     */
+    public int numberOfMembers()
+    {
+        return memberships.size(); 
+    }
+    
+    /**
+     * Determine the number of members who joinded in the given month. 
+     * @param month The month we are interested in.
+     * @return The number of members who joined in that month.
+     */
+    public int joinedInMonth(int month) throws IllegalArgumentException
+    {
+        int count = 0;
+        
+        if(month < 1 || month > 12) {
+            throw new IllegalArgumentException(
+                "Month " + month + " out of range. Must be in the range 1 ... 12");
+        }
+        
+        for(Membership member : memberships )
+        {
+            if(member.getMonth() == month)
+            {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+    
+    /**
+     * Remove from the club's collection all members who
+     * joined in the given month, and return them stored
+     * in a separate collection object.
+     * @param month The month of the membership.
+     * @param year The year of the membership.
+     * @return The members who joined in the given month and year
+     */
+    public ArrayList<Membership> purge(int month, int year)
+    {
+        if(month < 1 || month > 12) {
+            System.out.println("Month " + month + " out of range. Must be in the range 1 ... 12");
+            return new ArrayList<Membership>();
+        }
+        
+        Iterator<Membership> it = memberships.iterator();
+        
+        ArrayList<Membership> toReturn = new ArrayList<Membership>();
+            
+        while(it.hasNext())
+        {
+            Membership m = it.next();
+            
+            if(m.getMonth() == month && m.getYear()==year)
+            {
+                toReturn.add(m);
+                it.remove();
+            }
+        }
+        
+        return toReturn;
+    }
+}
+\end{lstlisting}
+
+\section*{Exercises 4.48-4.52}
+\textit{Answer for Exercise 4.50}: The \textit{getLot} method is entirely based on the array's size, thus removing an item will decrease the size of the array in such a way that the \textit{lotNumber} will no longer correspond to the actual \textit{lot} number.
+
+\verb|Lot selectedLot = lots.get(lotNumber - 1);|
+
+If we instead create a for loop that will check individual lots and compare to the \textit{lotNumber} requested, the size of the array (which works kind of like an internal counter) will no longer matter.
+\\
+\\
+\textbf{The Action class} is shown below:
+\begin{lstlisting}
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Auction
+{
+    // The list of Lots in this auction.
+    private ArrayList<Lot> lots;
+    // The number that will be given to the next lot entered
+    // into this auction.
+    private int nextLotNumber;
+
+    /**
+     * Create a new auction.
+     */
+    public Auction()
+    {
+        lots = new ArrayList<Lot>();
+        nextLotNumber = 1;
+    }
+
+
+    public void enterLot(String description)
+    {
+        lots.add(new Lot(nextLotNumber, description));
+        nextLotNumber++;
+    }
+
+
+    public void showLots()
+    {
+        for(Lot lot : lots) {
+            System.out.println(lot.toString());
+        }
+    }
+    
+
+    public void makeABid(int lotNumber, Person bidder, long value)
+    {
+        Lot selectedLot = getLot(lotNumber);
+        if(selectedLot != null) {
+            Bid bid = new Bid(bidder, value);
+            boolean successful = selectedLot.bidFor(bid);
+            if(successful) {
+                System.out.println("The bid for lot number " +
+                                   lotNumber + " was successful.");
+            }
+            else {
+                // Report which bid is higher.
+                Bid highestBid = selectedLot.getHighestBid();
+                System.out.println("Lot number: " + lotNumber +
+                                   " already has a bid of: " +
+                                   highestBid.getValue());
+            }
+        }
+    }
+
+
+    public Lot getLot(int lotNumber)
+    {
+        if((lotNumber >= 1) && (lotNumber < nextLotNumber)) {
+            
+            
+            for(Lot lot : lots)
+            {
+                if(lot.getNumber() == lotNumber)
+                {
+                    return lot;
+                }
+            }
+            
+            return null;
+            
+        }
+        else {
+            System.out.println("Lot number: " + lotNumber +
+                               " does not exist.");
+            return null;
+        }
+    }
+    
+    public void close()
+    {
+        for(Lot lot : lots)
+        {
+            Bid highestBid = lot.getHighestBid();
+            
+            if(highestBid != null)
+            {
+                System.out.println(lot.toString() + " by " + highestBid.getBidder().getName());
+            }
+            else
+            {
+                System.out.println(lot.toString() + " does not have any bidders");
+            }
+        }
+    }
+    
+    public ArrayList<Lot> getUnsold()
+    {
+        ArrayList<Lot> unsoldLots = new ArrayList<Lot>();
+        
+        int count = 0;
+        
+        for(Lot lot : this.lots)
+        {
+            if(lot.getHighestBid() == null)
+            {
+                unsoldLots.add(this.lots.get(count));
+            }
+            count++;
+        }
+        
+        return unsoldLots;
+    }
+    
+    /**
+     * Remove the lot with the given lot number
+     * @param number The number of the lot to be removed.
+     * @return The lot with the given number, or null if there is no such lot.
+     */
+    public Lot removeLot(int number)
+    {       
+        if((number >= 1) && (number < nextLotNumber)) {
+            
+            Iterator<Lot> it = lots.iterator();
+            
+            while(it.hasNext())
+            {
+                Lot lot = it.next();
+                
+                if(lot.getNumber() == number)
+                {
+                    lots.remove(lot);
+                    return lot;
+                }
+            }
+            
+            return null;
+            
+        }
+        else {
+            System.out.println("Lot number: " + number +
+                               " does not exist.");
+            return null;
+        }
+    }
+    
+}
+\end{lstlisting}
+\newpage
+\section*{Exercises 4.56-4.59}
+The \textbf{StockManager} class is illustrated below:
+\begin{lstlisting}
+import java.util.ArrayList;
+
+/**
+ * Manage the stock in a business.
+ * The stock is described by zero or more Products.
+ * 
+ * @author (Artem Los) 
+ * @version (2014.09.29)
+ */
+public class StockManager
+{
+    // A list of the products.
+    private ArrayList<Product> stock;
+
+    /**
+     * Initialise the stock manager.
+     */
+    public StockManager()
+    {
+        stock = new ArrayList<Product>();
+    }
+
+    /**
+     * Add a product to the list.
+     * @param item The item to be added.
+     */
+    public void addProduct(Product item)
+    {
+        stock.add(item);
+    }
+    
+    /**
+     * Receive a delivery of a particular product.
+     * Increase the quantity of the product by the given amount.
+     * @param id The ID of the product.
+     * @param amount The amount to increase the quantity by.
+     */
+    public void delivery(int id, int amount)
+    {
+        Product product = findProduct(id);
+        
+        if(product != null)
+        {
+            product.increaseQuantity(amount);
+        }
+    }
+    
+    /**
+     * Try to find a product in the stock with the given id.
+     * @return The identified product, or null if there is none
+     *         with a matching ID.
+     */
+    public Product findProduct(int id)
+    {
+        for(Product product : stock)
+        {
+            if(product.getID() == id)
+            {
+                return product;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Locate a product with the given ID, and return how
+     * many of this item are in stock. If the ID does not
+     * match any product, return zero.
+     * @param id The ID of the product.
+     * @return The quantity of the given product in stock.
+     */
+    public int numberInStock(int id)
+    {
+        Product product = findProduct(id);
+        
+        if(product != null)
+        {
+            return product.getQuantity();
+        }
+        
+        return 0;
+    }
+
+    /**
+     * Print details of all the products.
+     */
+    public void printProductDetails()
+    {
+        for(Product product : stock)
+        {
+            System.out.println(product.toString());
+        }
+        
+    }
+}
+\end{lstlisting}
+\end{document}
+

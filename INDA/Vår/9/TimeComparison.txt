@@ -1,0 +1,6 @@
+time: 
+badjulia.go: 42 s
+julia.go: 30 s
+ - image split 2: 27
+ - more split 4 : 23 - bad pictures.
+ - another split 2: 25

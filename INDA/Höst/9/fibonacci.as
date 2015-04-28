@@ -1,0 +1,20 @@
+// computes fibonacci sequence and stores result in RAM
+
+	word init 1 1	// the initial array needed to generate a sequence
+
+	loadc r1 init	// load the initial array into r1
+	
+ 	loadc r0 11	// the number of iterations we want to make
+	loadc r2 0	// starting value for the number of iterations
+	
+	addc r1 2	// set the index of array to 1 ( out of 0,1,2...)
+
+Loop:	addc r1 -2	// decrease the index of array by 1
+	loadr re r1	// initialize F_{n-2} item in array to re
+	addc r1 2	// increase n by 1 (the index)
+	loadr rf r1	// initialize F_{n-1} item in array to rf
+	addc r1 2	// increase n by 1 (the index)
+	add rd re rf	// add value at re and rf and put it into rd
+	storer rd r1	// store the rd value in F_{n}
+	addc r2 1	// increase the starting value by 1 (i.e. i++)
+	jumpn r2 Loop	// loop if r2 != r0

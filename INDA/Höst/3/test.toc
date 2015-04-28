@@ -1,0 +1,19 @@
+\select@language {swedish}
+\contentsline {section}{\numberline {1}Grafuppgifter}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Rita grafer}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Graf med 8 h\IeC {\"o}rn}{1}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}Djupet f\IeC {\"o}rst-s\IeC {\"o}kning}{1}{subsubsection.1.2.1}
+\contentsline {subsubsection}{\numberline {1.2.2}Bredden f\IeC {\"o}rst-s\IeC {\"o}kning}{1}{subsubsection.1.2.2}
+\contentsline {subsection}{\numberline {1.3}Representera med n\IeC {\"a}rhetsmatris eller n\IeC {\"a}rhetslistor}{1}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}1000 h\IeC {\"o}rn, 2000 kanter, sparsam med minne}{1}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}1000 h\IeC {\"o}rn, 50 000 kanter, sparsam med minne}{1}{subsubsection.1.3.2}
+\contentsline {subsubsection}{\numberline {1.3.3}Avg\IeC {\"o}ra om 2 h\IeC {\"o}rn \IeC {\"a}r grannar p\IeC {\r a} konstant tid}{1}{subsubsection.1.3.3}
+\contentsline {subsection}{\numberline {1.4}Varf\IeC {\"o}r \IeC {\"a}r DFS $\Theta (n^2)$ f\IeC {\"o}r en sammanh\IeC {\"a}ngande graf med n h\IeC {\"o}rn som representeras med en n\IeC {\"a}rhetsmatris}{1}{subsection.1.4}
+\contentsline {section}{\numberline {2}Programmering med grafer}{1}{section.2}
+\contentsline {subsection}{\numberline {2.1}Resultat}{1}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Val av datastruktur}{1}{subsection.2.2}
+\contentsline {section}{\numberline {A}K\IeC {\"a}llkod}{2}{appendix.A}
+\contentsline {subsection}{\numberline {A.1}GraphBuilder.java}{2}{subsection.A.1}
+\contentsline {subsection}{\numberline {A.2}ListGraph.java}{2}{subsection.A.2}
+\contentsline {subsection}{\numberline {A.3}ListGraphTest.java}{2}{subsection.A.3}
+\contentsline {subsection}{\numberline {A.4}ListGraphVertexIterator.java}{2}{subsection.A.4}

@@ -1,0 +1,40 @@
+package main
+
+import (
+	"fmt"
+)
+
+func Abs(x float64) float64 {
+	if x >= float64(0) {
+		return x
+	} else {
+		return float64(-1) * x
+	}
+}
+
+func Sqrt(x float64) float64 {
+	var z float64 = 1 // 1,2,3 don't influence the result
+	var zPrev float64 = 1
+
+	// removed i := 0; i < 100; i++
+	for {
+		z = z - (z*z-x)/(2*z)
+
+		//fmt.Println("z = " , z, " zPrev=", zPrev)
+		//fmt.Println("The error is: ", Abs(z - zPrev))
+		if Abs(z-zPrev) <= 2.220446049250313e-16 {
+			//fmt.Println((z+zPrev)/2)
+			return z
+		}
+		zPrev = z
+	}
+
+	return z
+}
+
+func main() {
+	fmt.Println(Sqrt(5)) // z == zPrev does not seem to occur
+	//fmt.Println(Sqrt(3))
+	//fmt.Println(Sqrt(25))
+	//fmt.Println(1.2e10)
+}

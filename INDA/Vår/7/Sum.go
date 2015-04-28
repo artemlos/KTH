@@ -1,0 +1,31 @@
+package main
+
+import "fmt"
+
+// Add adds the numbers in a and sends the result on res.
+func Add(a []int, res chan<- int) {
+	var i int = 0
+	for _, r := range a {
+		i += r
+	}
+
+	res <- i
+}
+
+func main() {
+	a := []int{1, 2, 3, 4, 5, 6, 7}
+
+	n := len(a)
+	ch := make(chan int)
+	go Add(a[:n/2], ch)
+	go Add(a[n/2:], ch)
+
+	sum := <-ch + <-ch
+	fmt.Println(sum)
+	/*
+		Marcus, why doesn't this work?
+		for _,r := range ch {
+			fmt.Println(r)
+		}
+	*/
+}

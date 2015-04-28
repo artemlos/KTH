@@ -1,0 +1,103 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[ruled,vlined]{algorithm2e}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+
+\lstset{
+% vilket språk vi använder i våra kodlistings, så att listings-paketet vet hur den ska highligta saker
+language=Java,
+% huruvida vi ska ha syntax highlighting
+fancyvrb=true,
+% hur stora tabstopp vi ska ha
+tabsize=4,
+% huruvida vi ska tillåta andra tecken än a-z
+extendedchars=\true
+% hur breda listings vi vill ha (skriv exempelvis linewidth=0.5\textwidth för att få listings som bara tar upp halva bredden av sidan)
+linewidth=\textwidth,
+% huruvida vi ska visa mellanslag
+showstringspaces=false,
+% huruvida vi ska bryta rader som är för långa
+breaklines=true,
+% huruvida den ska få bryta rader mitt i ord eller inte (true här betyder att den bara bryter mellan ord)
+breakatwhitespace=true,
+% indentera radbrytningar automatiskt
+breakautoindent=true,
+% lägg in radnummer på vänster sida
+numbers=left,
+% hur stora radnumren ska vara
+numberstyle=\tiny,
+% hur långt det ska vara mellan radnumren och koden
+numbersep=8pt
+}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+\section*{Exercise 'NIC programs'}
+
+
+\subsection*{Multiplication of an array}
+\lstinputlisting{mulArray.as}
+\subsection*{Moving around things in memory}
+\lstinputlisting{movestuff.as}
+\subsection*{Fibonacci generator}
+\lstinputlisting{fibonacci.as}
+
+\section*{Exercise 'wost case ordo and ordo in general'}
+\subsection*{Loop 1}
+I chose the for loop as the \textit{loop invariance}.
+Then, $O(n)$.
+\subsection*{Loop 2}
+The $i$ is never increased. Thus the array will continue forever. There is no worst case then. NB: If this is a typo, and it should say $i++$ in the array, then $O(n)$.
+
+\subsection*{Loop 3}
+The $i$ is never increased, hence no worst case. If it's assumed that $i$ is increased by $1$, we have $O(n^2)$.
+
+\subsection*{Loop 4}
+I assume that all for-loops have an implicit increment of $1$ on each iteration for the variable given in the initialization. Then, $O(n^2)$
+
+\subsection*{Loop 5}
+The same assumption regarding the dummy variable that keeps track of the index. Then, $O(n^4)$. We will sum $1+2+3+4+5 + \dots  + x$ $n^2$ times.
+
+\subsection*{Exercise 'explain ordo'}
+\textbf{Statement} We want to show that $(n+1)^3 = O(n^3)$.\\
+\textbf{Explanation} Let's expand LHS.
+\begin{eqnarray*}
+(n+1)^3 = n^3 + 3n^2 + 3n + 1
+\end{eqnarray*}
+The definition states that $\exists c > 0, \exists n_0 > 0 : f(n) \le cg(n), \forall n\ge n_0$. In our case, we want to find positive constants $c,n_0$ such that $n^3+3n^2 + 3n +1 \le cn^3 $ for all $n\ge n_0$. 
+
+Let's divide both sides by $n^3$, i.e.
+
+\begin{eqnarray*}
+\frac{n^3+3n^2+3n+1}{n^3} \le c \\
+1 + \frac{3}{n} + \frac{3}{n^2} + \frac{1}{n^3} \le c\\
+\end{eqnarray*}
+
+Already at this stage we see that the constant will be finite given our restriction that $n> n_0$, where $n_0 > 0$. In fact, as $n \to \infty$, $c$ can be as little as $1$.$\square$
+
+\subsection*{Exercise 'reverse algorithm analysis'}
+The algorithm will have $T(n) = O(n)$. The key operation is the number of times the for loop is being executed. That's because the operation involved inside the for loop have a constant time, i.e. $O(1)$, so it won't affect the final ordo expression.
+
+If the array contains identical elements, then the swap operation is not going to be executed. Assuming it takes a constant amount of time to execute it, no noticeable change is going to be observed. Maybe, some more time, depending on the how much time the \textit{swap} operation takes. 
+
+
+\end{document}
+

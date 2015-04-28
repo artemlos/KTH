@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Grafuppgifter}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Rita grafer}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Graf med 8 h\366rn}{section.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Djupet f\366rst-s\366kning}{subsection.1.2}% 4
+\BOOKMARK [3][-]{subsubsection.1.2.2}{Bredden f\366rst-s\366kning}{subsection.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.3}{Representera med n\344rhetsmatris eller n\344rhetslistor}{section.1}% 6
+\BOOKMARK [3][-]{subsubsection.1.3.1}{1000 h\366rn, 2000 kanter, sparsam med minne}{subsection.1.3}% 7
+\BOOKMARK [3][-]{subsubsection.1.3.2}{1000 h\366rn, 50 000 kanter, sparsam med minne}{subsection.1.3}% 8
+\BOOKMARK [3][-]{subsubsection.1.3.3}{Avg\366ra om 2 h\366rn \344r grannar p\345 konstant tid}{subsection.1.3}% 9
+\BOOKMARK [2][-]{subsection.1.4}{Varf\366r \344r DFS \(n2\) f\366r en sammanh\344ngande graf med n h\366rn som representeras med en n\344rhetsmatris}{section.1}% 10
+\BOOKMARK [1][-]{section.2}{Programmering med grafer}{}% 11
+\BOOKMARK [2][-]{subsection.2.1}{Resultat}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.2}{Val av datastruktur}{section.2}% 13
+\BOOKMARK [1][-]{appendix.A}{K\344llkod}{}% 14
+\BOOKMARK [2][-]{subsection.A.1}{GraphBuilder.java}{appendix.A}% 15
+\BOOKMARK [2][-]{subsection.A.2}{ListGraph.java}{appendix.A}% 16
+\BOOKMARK [2][-]{subsection.A.3}{ListGraphTest.java}{appendix.A}% 17
+\BOOKMARK [2][-]{subsection.A.4}{ListGraphVertexIterator.java}{appendix.A}% 18

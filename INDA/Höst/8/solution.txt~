@@ -1,0 +1,30 @@
+* partial sums:
+
+1 + 2 + 3 + 4 + ... + n 
+
+n(n+1)/2 = O(n^2)
+
+There is no good case or bad case. it will  iterate the same ammount
+no matter the size nor items in the array. theoretically.
+
+
+a better algorithm:
+B[0] = A[1]
+for i=1 to n
+ B[i] = B[i-1]+A[i]
+
+
+* x abs(sinx)
+
+
+n^3 + n ^2 n = O (n^3)
+ O (n^3) = n^3 + n ^2 n
+
+= O(n^3)
+
+= n^2 + O( n^2)
+
+n^
+
+n
+n^2 / 2 < 

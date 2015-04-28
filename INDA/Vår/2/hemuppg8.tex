@@ -1,0 +1,92 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[ruled,vlined]{algorithm2e}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+
+\lstset{
+% vilket språk vi använder i våra kodlistings, så att listings-paketet vet hur den ska highligta saker
+language=Java,
+% huruvida vi ska ha syntax highlighting
+fancyvrb=true,
+% hur stora tabstopp vi ska ha
+tabsize=4,
+% huruvida vi ska tillåta andra tecken än a-z
+extendedchars=\true
+% hur breda listings vi vill ha (skriv exempelvis linewidth=0.5\textwidth för att få listings som bara tar upp halva bredden av sidan)
+linewidth=\textwidth,
+% huruvida vi ska visa mellanslag
+showstringspaces=false,
+% huruvida vi ska bryta rader som är för långa
+breaklines=true,
+% huruvida den ska få bryta rader mitt i ord eller inte (true här betyder att den bara bryter mellan ord)
+breakatwhitespace=true,
+% indentera radbrytningar automatiskt
+breakautoindent=true,
+% lägg in radnummer på vänster sida
+numbers=left,
+% hur stora radnumren ska vara
+numberstyle=\tiny,
+% hur långt det ska vara mellan radnumren och koden
+numbersep=8pt
+}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+\section*{Exercise 9.11}
+The \textit{Device} class must have a definition of \textit{getName} method, because \textit{Device} class is the static type.
+\section*{Exercise 9.12}
+At runtime, the \textit{getName} that is defined in the dynamic type - \textit{Printer} class - will be executed.
+\section*{Exercise 9.13}
+All classes inherit from \textit{Object} class, so if the \textit{Student} class does not override the \verb|toString| method, the one in \verb|object.toString| will be used. This will print out the class name and a memory address. These lines will compile.
+\section*{9.14}
+The following lines will compile. \verb|System.out.println()| will search for \verb|toString| method when attempting to get a representation of the object. This will return the same piece of information in \textit{Exercise 9.13}, eg. \verb|Student@43b6c732|.
+\section*{Exercise 9.15}
+Since the \textit{Object} class has a method \verb|toString|, this code will compile. At runtime, the compiler will check if this method exists in the dynamic type, so if we have overridden it with another method in the \textit{Student} class, the custom method will be executed, i.e. the one in the \textit{Student} class.
+\section*{Exercise 9.16}
+\begin{lstlisting}
+T x = new D();
+\end{lstlisting}
+
+\section*{Linked List}
+\subsection*{Time complexity}
+\textbf{isHealthy} = $O(n)$\\
+\textbf{LinkedList} = $O(1)$\\
+\textbf{addFirst} = $O(1)$\\
+\textbf{addLast} = $O(1)$\\
+\textbf{getFirst} = $O(1)$\\
+\textbf{getLast} = $O(1)$\\
+\textbf{get} = $O(n)$\\
+\textbf{removeFirst} = $O(1)$\\
+\textbf{clear} = $O(1)$\\
+\textbf{size} = $O(1)$\\
+\textbf{isEmpty} = $O(1)$\\
+\textbf{toString} = $O(n)$\\
+
+\newpage
+\subsection*{Source code}
+\subsubsection*{LinkedList class}
+\lstinputlisting{LinkedList.java}
+\subsubsection*{LinkedListTest class}
+\lstinputlisting{LinkedListTest.java}
+
+
+\end{document}
+

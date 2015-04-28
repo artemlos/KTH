@@ -1,0 +1,26 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\author{Artem Los}
+\title{Hello}
+\begin{document}
+
+\section{Exercise 3.1}
+\begin{figure}[h]
+\includegraphics{rel1}
+\caption{Class diagram}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics{rel2}
+\caption{Object diagram}
+\end{figure}
+A class diagram illustrates the relationship between classes in general. As it can be seen in Figure 1, we can see that Student class is a part of a Lab class. An object diagram, in contrast to a class diagram, displays the way objects look like at a certain point in the objects' lifecycle. Figure 2 clearly shows that in that particular case, there are three Student objects that have signed up for a Lab Class session.
+
+\section{Exercise 3.2}
+A class diagram can change when the class is changed or the way the classes are connected.
+\end{document}

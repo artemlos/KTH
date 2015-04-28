@@ -1,0 +1,61 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[ruled,vlined]{algorithm2e}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+
+\lstset{language=Java,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\footnotesize,
+numbers=left,
+rulesepcolor=\color{gray}, %fancy shadow for borders
+stepnumber=1,
+frame=shadowbox,
+breaklines=true}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+\section*{Exercise 10.71}
+\lstinputlisting{Person.java}
+
+\section*{Exercise 'stack'}
+\subsection*{IStack interface}
+\lstinputlisting{IStack.java}
+\subsection*{Stack class}
+\lstinputlisting{Stack.java}
+\subsection*{Stack error}
+\lstinputlisting{StackEmptyException.java}
+\subsection*{MathStack class}
+\lstinputlisting{MathStack.java}
+\subsection*{Stack Test}
+\lstinputlisting{StackTest.java}
+
+\section*{Exercise 'Postfix'}
+\subsection*{Postfix class}
+\lstinputlisting{Postfix.java}
+\subsection*{PostfixTest class}
+\lstinputlisting{PostfixTest.java}
+\subsection*{InvalidExpressionException class}
+\lstinputlisting{InvalidExpressionException.java}
+
+
+
+\end{document}
+

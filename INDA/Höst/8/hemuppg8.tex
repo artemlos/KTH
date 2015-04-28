@@ -1,0 +1,145 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[ruled,vlined]{algorithm2e}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+
+\lstset{
+% vilket språk vi använder i våra kodlistings, så att listings-paketet vet hur den ska highligta saker
+language=Java,
+% huruvida vi ska ha syntax highlighting
+fancyvrb=true,
+% hur stora tabstopp vi ska ha
+tabsize=4,
+% huruvida vi ska tillåta andra tecken än a-z
+extendedchars=\true
+% hur breda listings vi vill ha (skriv exempelvis linewidth=0.5\textwidth för att få listings som bara tar upp halva bredden av sidan)
+linewidth=\textwidth,
+% huruvida vi ska visa mellanslag
+showstringspaces=false,
+% huruvida vi ska bryta rader som är för långa
+breaklines=true,
+% huruvida den ska få bryta rader mitt i ord eller inte (true här betyder att den bara bryter mellan ord)
+breakatwhitespace=true,
+% indentera radbrytningar automatiskt
+breakautoindent=true,
+% lägg in radnummer på vänster sida
+numbers=left,
+% hur stora radnumren ska vara
+numberstyle=\tiny,
+% hur långt det ska vara mellan radnumren och koden
+numbersep=8pt
+}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+\section*{Exercises 7.15-7.19}
+\textit{Answer to 7.17}: Once a test fails, we can inspect the statement that caused it to fail. Eclipse will highlight that line of code. There appears to be a quick way (by right-clicking on the test case) to create a new task associated with the failure, so that other team members can look at it.
+\subsection*{SalesItemTest}
+\lstinputlisting{SalesItemTest.java}
+\subsection*{CommentTest}
+\lstinputlisting{CommentTest.java}
+
+\section*{Exercise 'insertion sort'}
+\subsection*{Sort class}
+\lstinputlisting{Sort.java}
+
+\subsection*{SortTest class}
+\lstinputlisting{SortTest.java}
+
+\section*{Exercise 'reverse order' of a vector}
+The algorithm that is to be described below work as following: \textit{Given that an array contains $n$ elements, we take the first item and replace it with the last. Later on, we take the second item and replace it with the second last and so on. We continue this procedure until will reach $\lfloor n/2 \rfloor -1$}.
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{Swap}{Swap}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+\Input{An array $A$ of $n$ integers}
+\Output{An array of integers in reveresed order}
+\BlankLine
+\For{$i \leftarrow 0$ \KwTo  $\lfloor n/2\rfloor -1$}{
+\Swap($A[i]$, $A[n-i]$)}
+\Return {A}
+\caption{Reverse order of an integer array}
+\end{algorithm}
+
+\section*{Exercise 'order according to Big Oh'}
+
+\begin{eqnarray*}
+n+100 \\
+n\log (n)\\
+n^{1.5}\\
+2^n\\
+10^n
+\end{eqnarray*}
+
+
+\section*{Exercise 'Big Oh'}
+Paul Bachmann's O-notation is defined as following:
+\begin{equation}
+f(n)=O(g(n)) \qquad \forall n
+\end{equation}
+which means that there is a constant $C$ such that:
+\begin{equation}
+|f(n)| \le C|g(n)| \qquad \forall n
+\end{equation}
+Big Omega notation is defined as
+\begin{equation}
+f(n) = \Omega(g(n)) \quad \iff \quad |f(n)| \ge C|g(n)| \quad \text{for some } C>0
+\end{equation}
+
+\begin{itemize}
+\item $n(n+1)/2 = O(n^3)$ is true because $n(n+1)/2 = 0.5n^2 + 0.5n$ which grows slower than $n^3$. Using definition, we can always pick a constant $C$ to make it work.
+\item  $n(n+1)/2 = O(n^2)$ is also true, similar to the reason above. When $n \to \infty$, only the highest degree term will matter. Again, we can always pick a constant to make this relationship valid.
+\item $n(n+1)/2 = \Theta(n^3)$ isn't true because $n^3$ is not the lower bound, i.e. $n(n+1)/2 \not= \Omega(n^3)$
+\item $n(n+1)/2 = \Omega(n)$ is true as $n$ grows slower than $0.5n^2+0.5n$
+\end{itemize}
+
+\section*{Exercise 'time complexity of algorithm'}
+\begin{itemize}
+\item The time complexity is $O(n^2)$
+\item There is no 'good' case nor 'bad' case. The algorithm will have iterate the same number of times for a given size of $n$. Thus, $\Omega(f(n))$ of this algorithm is the same as the Big Oh.
+\end{itemize}
+
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{Swap}{Swap}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+\Input{An array $A$ of $n$ integers}
+\Output{An array $B$ of partial sums of $A$}
+\BlankLine
+\For{$i \leftarrow 1$ \KwTo  $n-1$}{
+$B[i] = B[i-1] + A[i]$}
+\Return {B}
+\caption{Returns partial sums of a given array}
+\end{algorithm}
+
+This algorithm has time complexity $O(n)$.
+
+\section*{Exercise 'function that is neither Oh nor Omega}
+For example,
+
+\begin{equation*}
+f(x)=x^2 \times |sin(x)|
+\end{equation*}
+
+\end{document}
+

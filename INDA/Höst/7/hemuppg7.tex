@@ -1,0 +1,139 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+
+\lstset{
+% vilket språk vi använder i våra kodlistings, så att listings-paketet vet hur den ska highligta saker
+language=Java,
+% huruvida vi ska ha syntax highlighting
+fancyvrb=true,
+% hur stora tabstopp vi ska ha
+tabsize=4,
+% huruvida vi ska tillåta andra tecken än a-z
+extendedchars=\true
+% hur breda listings vi vill ha (skriv exempelvis linewidth=0.5\textwidth för att få listings som bara tar upp halva bredden av sidan)
+linewidth=\textwidth,
+% huruvida vi ska visa mellanslag
+showstringspaces=false,
+% huruvida vi ska bryta rader som är för långa
+breaklines=true,
+% huruvida den ska få bryta rader mitt i ord eller inte (true här betyder att den bara bryter mellan ord)
+breakatwhitespace=true,
+% indentera radbrytningar automatiskt
+breakautoindent=true,
+% lägg in radnummer på vänster sida
+numbers=left,
+% hur stora radnumren ska vara
+numberstyle=\tiny,
+% hur långt det ska vara mellan radnumren och koden
+numbersep=8pt
+}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+\section*{Exercises 5.62-5.67}
+The \textbf{BallDemo} class.
+\lstinputlisting{BallDemo.java}
+The \textbf{BoxBall} class.
+
+\lstinputlisting{BoxBall.java}
+
+\section*{Exercise 5.68}
+\begin{lstlisting}
+public final double tolerance = 0.001;
+private final int passMark = 40;
+public final char helpChar = 'h';
+\end{lstlisting}
+
+\section*{Exercise 5.69}
+The constants in the \textbf{LogEntry} class are used to shape the structure of a general log entry. For instance, in the fields below.
+\begin{lstlisting}
+private static final int YEAR = 0, MONTH = 1, DAY = 2,
+                       HOUR = 3, MINUTE = 4;
+private static final int NUMBER_OF_FIELDS = 5;
+\end{lstlisting}
+They assume that each log entry, at any time in the future, will have this structure. If log files keep to have this structure, this can be a good way of using the \textit{constant} functionality as it hides unnecessary information from the user. However, sometimes, the structure of a log entry can change; in that case, it's better to allow the user to specify these as optional parameters.
+
+\section*{Exercise 5.70}
+We would not need to change that much in the \textbf{LogEntry} class to make sure that it understands the new format. We only have to change the fields and the constructor. Yes, it's good to use named constants as it facilitates this sort of procedure.
+
+\section*{Exercise 5.71}
+\begin{lstlisting}
+public class NameGenerator
+{
+	public static String generateStarWarsName(String firstName, String lastName, String mothersMaidenName, String homeTown)
+	{
+		String swFirstName = lastName.substring(0,3) + firstName.substring(0,2).toLowerCase();
+		String swLastName = mothersMaidenName.substring(0,2) + homeTown.substring(0,3).toLowerCase();
+		
+		
+		return swFirstName + " " + swLastName;
+	}
+}
+\end{lstlisting}
+
+\section*{Exercise 5.72}
+The book's version does not work because the \textbf{String} class is \textit{immutable}. The \textit{toUpperCase} method does not modify the object, but rather a new \textit{String} object is returned.
+\begin{lstlisting}
+public void printUpper(String s)
+{
+	System.out.println(s.toUpperCase());
+}
+\end{lstlisting}
+
+\section*{Exercise 5.73}
+\textbf{Int} is an \textit{immutable} object so we cannot change the value once it is declared (unless we assign a new value to it). Int is a value type and when \textbf{a} and \textbf{b} are passed into \textbf{swap} method, we only send the value of them, not the reference. Therefore, the changes do not affect the \textbf{a} and \textbf{b} outside the method.
+
+
+\section*{Exercise 'bubble sort'}
+The algorithm will have to perform approx. $n^2$ for an array of $n$ elements. However, two cases can be considered: when the array is sorted, and when it is unsorted.
+\begin{enumerate}
+	\item When it is sorted, for example $\{1,2,3,4\}$, we need $2x$ operations, where $x=n-2$. That is, the array has to contain at least two elements.
+	\item When it is unsorted, for example $\{4,3,2,1\}$, we need $2x^2$ operations, where $x=n-2$. This type of unsorted array will have the most number of operations as the algorithm is linear and works from left to right.
+\end{enumerate}
+
+\section*{Exercise 'time vs. n'}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabular}{||l|l|l|l|l|l||}
+\hline
+$T(n)$ & 1 second & 1 minute & 1 hour & 1 day & 1 year\\
+\hline
+\hline
+$\log(n)$ & $2^{10^6} \approx 9.9 \times 10^{301029}$ & $2^{6 \times 10^{7}}$ &  $2^{3.6 \times 10^{9}}$  &  $2^{8.6 \times 10^{10}}$ & $2^{3.2 \times 10^{13}}$ \\
+\hline
+$n$ & $10^6$ & $6 \times 10^{7}$ & $3.6 \times 10^{9}$ & $8.6 \times 10^{10}$ & $3.2 \times 10^{13}$\\
+\hline
+$n\log (n)$ &  $6.2 \times 10^4$ & $2.8 \times 10^6$ &$1.3 \times 10^8$ & $6.0 \times 10^{10}$ & $8.1 \times 10^{11}$\\
+\hline%
+$n^2$ & $\sqrt{10^6} \approx 3.2 \times 10^3$  & $ 7.7\times 10^3$ & $6\times 10^4$ & $3.0 \times 10^{5}$ & $5.7 \times 10^6$\\
+\hline%
+$n^3$ & $ \sqrt[3]{10^6} \approx 2.2 \times 10^2$  & $4.0 \times 10^2$ & $1.5\times 10^3$ & $4.4 \times 10^3$ & $3.2 \times 10^4$\\
+\hline
+$2^n$ & $\log(10^6) \approx 20$ & $ \approx 26$ & $\approx 32$ & $\approx 36$ & $45$\\
+\hline
+$n!$ & $ \lessapprox 10$ & $\lessapprox 11$ & $\lessapprox 13$ & $\lessapprox 14$ & $16$\\
+\hline
+\end{tabular}
+
+
+
+\end{document}
+

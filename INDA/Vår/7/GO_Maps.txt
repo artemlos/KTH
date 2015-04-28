@@ -1,0 +1,29 @@
+package main
+
+import (
+	"golang.org/x/tour/wc"
+	"strings"
+)
+
+func WordCount(s string) map[string]int {
+
+	raw := strings.Fields(s)
+
+	var freq map[string]int = make(map[string]int)
+
+	for _, word := range raw {
+		if i, exists := freq[word]; exists == true {
+			i++
+			freq[word] = i
+		} else {
+			freq[word] = 1
+		}
+
+	}
+
+	return freq
+}
+
+func main() {
+	wc.Test(WordCount)
+}

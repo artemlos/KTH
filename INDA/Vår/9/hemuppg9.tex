@@ -1,0 +1,74 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[ruled,vlined]{algorithm2e}
+\author{Artem Los}
+\title{Hello}
+
+\usepackage{marginnote}
+\usepackage{verbatim} % for the box
+\usepackage{fancyvrb} % for the box
+
+\usepackage{listings}
+\usepackage{hyperref}
+
+\lstset{
+% vilket språk vi använder i våra kodlistings, så att listings-paketet vet hur den ska highligta saker
+language=Java,
+% huruvida vi ska ha syntax highlighting
+fancyvrb=true,
+% hur stora tabstopp vi ska ha
+tabsize=4,
+% huruvida vi ska tillåta andra tecken än a-z
+extendedchars=\true
+% hur breda listings vi vill ha (skriv exempelvis linewidth=0.5\textwidth för att få listings som bara tar upp halva bredden av sidan)
+linewidth=\textwidth,
+% huruvida vi ska visa mellanslag
+showstringspaces=false,
+% huruvida vi ska bryta rader som är för långa
+breaklines=true,
+% huruvida den ska få bryta rader mitt i ord eller inte (true här betyder att den bara bryter mellan ord)
+breakatwhitespace=true,
+% indentera radbrytningar automatiskt
+breakautoindent=true,
+% lägg in radnummer på vänster sida
+numbers=left,
+% hur stora radnumren ska vara
+numberstyle=\tiny,
+% hur långt det ska vara mellan radnumren och koden
+numbersep=8pt
+}
+
+\usepackage{pgf}
+\usepackage{pgfpages}
+
+\usepackage{fullpage}  % might require you to compile the page several times.
+
+
+
+\begin{document}
+\section*{Matching}
+\paragraph{\color{blue} Removing the go statement} from \verb|Seek| will turn the program into a synchronous one, where all steps can be predicted. Anna is going to send a message to Bob, Cody to Dave, and Eva to no one.
+\paragraph{\color{blue} Changing wait group} declarations will throw an error because we don't pass the wait group by reference to \verb|Seek| method and so the wait group inside \verb|Seek| isn't able to communicate with the one in \verb|main|. Two messages will be sent/received and the last one will fail as all go routines are asleep.
+
+\paragraph{\color{blue} Removing the buffer} will thrown an error because unbuffered channels accept sends only if there is a corresponding receive. There doesn't seem to be a clear receiver of the sent information through the channel.
+\begin{quotation}
+	By default channels are unbuffered, meaning that they will only accept sends (chan <-) if there is a corresponding receive (<- chan) ready to receive the sent value. Buffered channels accept a limited number of values without a corresponding receiver for those values.\footnote{https://gobyexample.com/channel-buffering, accessed 2015.04.14}
+\end{quotation}
+
+\paragraph{\color{blue} Removing default} will not cause any problems in the current set up as it is constructed in such a way that one will be left unmatched. However, decreasing the size of the array of people, for example by removing \textit{Eva} will throw a an error (a deadlock) because there is no one in the match channel left and it is still open. Thus, we are waiting for something that never arrives, which leads to a deadlock. A solution would be to add \verb|close(match)| right after \verb|wg.Wait()|.
+
+\section*{Julia}
+The program uses all CPUs. The speed improved in the order of 20s.
+It seems like some might argue that we should have go routines for each pixel, but I think that we should have four that can be spread out on 4 processors.
+\lstinputlisting{njulia.go}
+
+\section*{Weather Station}
+\lstinputlisting{njulia.go}
+
+\end{document}
+
