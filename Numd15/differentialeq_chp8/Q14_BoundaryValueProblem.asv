@@ -1,0 +1,8 @@
+% We now work with k = y''/(1+(y')^2)^(3/2)
+
+
+for alpha = -0.1:0.1:0.5
+    
+    init = [0 alpha]; % initial condition
+    func = @(x) x 
+end
