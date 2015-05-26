@@ -15,7 +15,10 @@ hold on
 for alpha = -0.1:0.1:0.5
     init = [0 alpha]'; % initial condition.
     [T,U] = ode45(func,[0 12]', init, rtol);
-    plot(T,U);
+    % we want to graph the y value (it has 2 columns, but we only need the
+    % y solution (note, we solve two systems at once since ODE is of the
+    % second order).
+    plot(T,U(:,1));
 end
 
 %%
@@ -27,13 +30,21 @@ end
 
 % We know (based on part1) that alpha value between 0.2 and 0.3
 alpha1 = 0.2;
-[T,U] = ode45(func, [0 12], [0 alpha1], 1e-5);
-g1=U(end,1)-4
+[T,U] = ode45(func, [0 12], [0 alpha1], rtol);
+
+g1=U(end,1)-4 
 alpha2 = 0.3;
 h= 0.1;
-
-while abs(h/alpha2) > 0.5e-6
-    
-    
+dx = 1
+while abs(dx) > 0.5e-6
+    [T, U] = ode45(func, [0 12], [0 alpha2], rtol);
+    g2 = U(end,1)-4;
+    dx = -g2*(alpha2-alpha1)/(g2-g1);
+    alpha1=alpha2;
+    g1=g2;
+    alpha2 = alpha2 + dx;
 end
 
+alpha2 % this is our new alpha that will end up with a y_end close to 4.
+U(end,1) % equal to approx. 4
+plot(T,U(:,1),'.')
