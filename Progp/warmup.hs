@@ -32,14 +32,12 @@ karpsravor s = if isConsonant( head s)
 			   then [head s]++karpsravor( drop 3 s)
 			   else [head s] ++ karpsravor(tail s)
 
---medellangd :: String -> Double
-wordCount = 0
-charCount = 0
---medellangd s = map(getCount)s
+-- words/no of letters,
+medellangd :: String -> Double
+medellangd s = fromIntegral ( noOfLetters (s)) / (fromIntegral (length s -noOfLetters (s)) )
 
-getCount s = if isAlpha (head s)
-			 then 1
-			 else 0
-
+-- Calculates the number of letters in a string.
+noOfLetters :: String -> Int
+noOfLetters xs = length[x | x <- xs, isAlpha x]
 
 skyffla s = s
