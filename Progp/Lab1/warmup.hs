@@ -24,7 +24,8 @@ rovarsprak s = if isConsonant( head s)
 			   else [head s] ++ rovarsprak(tail s)
 
 isConsonant :: Char -> Bool
-isConsonant s = not('a' == s || 'e' == s || 'i' == s || 'o' == s || 'u' == s || 'y' == s)
+--isConsonant s = not('a' == s || 'e' == s || 'i' == s || 'o' == s || 'u' == s || 'y' == s)
+isConsonant s = not (elem s "aeiouy")
 
 karpsravor :: String -> String
 karpsravor "" = ""
@@ -36,8 +37,14 @@ karpsravor s = if isConsonant( head s)
 medellangd :: String -> Double
 medellangd s = fromIntegral ( noOfLetters (s)) / (fromIntegral (length s -noOfLetters (s)) )
 
+
+
 -- Calculates the number of letters in a string.
 noOfLetters :: String -> Int
 noOfLetters xs = length[x | x <- xs, isAlpha x]
+
+noOfWords :: String -> Int
+noOfWords s = sum (map (length) c))
+	where c = removeEmpty (split s)
 
 skyffla s = s
