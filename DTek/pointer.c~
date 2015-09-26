@@ -18,7 +18,6 @@ void copycodes(char* string, int* list, int counter) {
 	char c = *string;
 	while(c != '\0') {
 		string = string + 1;
-		c = *string;
 		putchar(c);
 	}
 	

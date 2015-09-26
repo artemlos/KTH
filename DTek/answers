@@ -1,0 +1,9 @@
+* gv and in are stored in RAM. because RAM allows read-write.
+* fun and main are stored on Program Flash, which is code and read only. the data is the instruction being pointed at.
+* p and m are at reserved memory. p and m are bigger because are at a diff. section of memory than gv and in.
+* p is pointing to the address of m. (double pointer.)
+* p points to the same value ,but the value  of  m has incremented
+* data pointers are always 32 bits in PIC32.
+* each char takes 1 Byte, and we have 3 of them in addition to the null character. thus 4 are needed.
+* it's a little endian because the lsb (cd) starts at the lowest address.
+* fun gets the value of m, not the ref, and gv  (global variable) is set to m+1.
