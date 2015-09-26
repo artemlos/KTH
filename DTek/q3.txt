@@ -1,4 +1,0 @@
-* sieves-heap  2s 1 000 000. 10 s 9,000,000
-* sieves: 2s 1,000,000: 10s 8,000,000
-
-saving in the stack results in stack overflow (ge 9000000), but no problem with the heap.

@@ -106,7 +106,7 @@ loop:
 	
 	nop
 	
-	subi	$a0, $0, 1
+	addi	$a0, $0, -1
 	addi	$t6, $0, 55754
 	addi	$t7, $0, -1
 	
@@ -161,24 +161,8 @@ time2string:
 	POP 	($ra)
 	sb	$v0, 4($a0)
 	
-	andi	$t5, $t5, 1
-	bne	$t5, 1, even
-	nop
-	
-	addi	$t4, $0, 0x44
-	sb	$t4, 5($a0)
-	
-	j	slut
-	nop
-	
-	even:
-	addi	$t4, $0, 0x45
-	sb	$t4, 5($a0)
-	
-	
-	slut:
 	addi	$t4, $0, 0x0
-	sb	$t4, 6($a0)
+	sb	$t4, 5($a0)
 	
 	jr	$ra
 	nop

@@ -1,0 +1,3 @@
+* let a0 = 5. the program will jump to hexasc. we perform add operation on a0 to get rid of all the other bits but the first ones (4 lsb). Then,we start the count at 0x30 (as that is the ASCI code for zero) and later we check if a0 is in the range 0-9. if that is the case, we just directly to converter. otherwise, we add 7 as that is the number of characters between 0 and A.
+
+* 

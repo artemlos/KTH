@@ -1,0 +1,5 @@
+* it saves the result into the memory as a pointed by $a0.
+* yes. inside the time2string subroutine, because we are calling another subroutine
+inside it and we have to save the $ra registers.
+* inside the stack. but, we could also save it in one of the save registers but then we have to save the save register.
+* as long as  $a0 is >= 16 bits, then we can shift the bits and get the other information.

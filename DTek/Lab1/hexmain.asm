@@ -29,6 +29,7 @@ hexasc:
 	addi	$t0, $0, 0x9
 	
 	ble	$a0, $t0, converter
+	nop
 	
 	addi	$v0, $v0, 0x7
 	
@@ -37,3 +38,4 @@ converter:
 	add	$v0, $a0, $v0
 	
 	jr	$ra
+	nop
