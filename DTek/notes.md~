@@ -54,9 +54,4 @@ each port is contolled by TRISx and PORTx registers, x is the letter for the por
 * Port is the actual value
 NB: a port of this kind refers to several ins/outs. thus, TRIS = 0xFF00 means that 8 GPIO pins will output while the remaning input.
 
-ex.
-PORTDSET = 0b0101;
-PORTDCLR = 0b1000;
-
-This will target the ones only. So, it wil first set the 1st and 3rd bit while it clears the 4th.
 
